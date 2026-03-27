@@ -1,0 +1,19 @@
+{
+  "name": "pbt-ping",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PBT Ping — internal health status page",
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail --prefix-colors cyan,magenta --names web,api \"corepack pnpm run dev:web\" \"corepack pnpm run dev:api\"",
+    "dev:web": "corepack pnpm --filter=@pbt-ping/web run dev",
+    "dev:api": "corepack pnpm --filter=@pbt-ping/api run start:dev",
+    "build": "corepack pnpm --filter=@pbt-ping/api run build && corepack pnpm --filter=@pbt-ping/web run build",
+    "lint": "corepack pnpm --filter=@pbt-ping/web run lint && corepack pnpm --filter=@pbt-ping/api run lint",
+    "typecheck": "corepack pnpm --filter=@pbt-ping/web exec tsc --noEmit && corepack pnpm --filter=@pbt-ping/api exec tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.3.3"
+  }
+}

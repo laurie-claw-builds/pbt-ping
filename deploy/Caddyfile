@@ -1,0 +1,16 @@
+# PBT Ping site block — add this to /root/stageflow/deploy/Caddyfile
+# then reload Stageflow's Caddy container:
+#   docker exec stageflow-caddy-1 caddy reload --config /etc/caddy/Caddyfile
+
+pbt-ping.pbthub.com {
+  encode gzip zstd
+
+  header {
+    Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    X-Content-Type-Options "nosniff"
+    Referrer-Policy "strict-origin-when-cross-origin"
+    X-Frame-Options "SAMEORIGIN"
+  }
+
+  reverse_proxy pbt-ping-web:5000
+}
